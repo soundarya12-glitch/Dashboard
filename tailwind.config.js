@@ -7,7 +7,11 @@ export default {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        victor: ['"Victor Mono"', 'monospace'],
+      },
+    },
   },
   plugins: [],
-};
+}

@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Victor+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
 @custom-variant dark (&:is(.dark *));
 
@@ -118,20 +119,21 @@ body {
 /* Thin scrollbar for modern browsers */
 .scrollbar-thin {
   scrollbar-width: thin; /* Firefox */
-  scrollbar-color: #7c3aed #1f1f1f; /* thumb color, track color */
+  scrollbar-color:white #1f1f1f; /* thumb color, track color */
 }
 
 /* Webkit browsers (Chrome, Edge, Safari) */
 .scrollbar-thin::-webkit-scrollbar {
-  width: 6px;
+
+  height:1px ;
 }
 .scrollbar-thin::-webkit-scrollbar-track {
   background: #1f1f1f; /* track color */
 }
 .scrollbar-thin::-webkit-scrollbar-thumb {
-  background-color: #7c3aed; /* thumb color */
-  border-radius: 9999px;
-  border: 1px solid #1f1f1f; /* optional border */
+  background-color:white; /* thumb color */
+
+/* optional border */
 }
 .footer {
   background:white;
@@ -142,4 +144,64 @@ body {
   bottom: 0;
   width: 100%;
 }
+@layer components {
+  .sidebar {
+    @apply
+      font-sans
+      font-medium
+      text-sm
+      leading-none
+      tracking-normal
+      align-middle
+      text-white
+      bg-black
+   
+  }
+  
+  .topbar {
+  @apply font-sans font-semibold text-lg leading-[0.7] tracking-[-0.02em] align-middle text-white;
+}
 
+.totalprojects {
+  @apply font-medium text-[14px] leading-[100%] tracking-[-0.35px] text-white align-middle;
+}
+@font-face {
+  font-family: 'Victor Mono';
+  src: url('/fonts/VictorMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+@layer base {
+  .left-align {
+    @apply pl-6 text-left;
+  }
+}
+@layer base {
+  .font-victor {
+    font-family: "Victor Mono", monospace;
+  }
+  h2{
+    margin-top:1px ;
+  }
+}
+ .submenu-item::before {
+  content: "";
+  display: block;
+  height: 1px;           /* thickness of line */
+  background-color: #555; /* color */
+  width: 100%;            /* full width of menu */
+  margin-bottom: 4px;     /* space between line and text */
+}
+.prioritybadge {
+  font-family: sans-serif;     /* font/family/sans */
+  font-weight: 400;            /* Regular */
+  font-size: 12px;             /* spacing/3 */
+  line-height: 16px;           /* spacing/4 */
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
+
+
+}

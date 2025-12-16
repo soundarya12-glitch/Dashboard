@@ -1,16 +1,16 @@
+"use client"
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { PlusIcon } from "lucide-react"
-
 export function OverviewBoard() {
   const columns = [
     {
       name: "TO-DO",
       tasks: [
-        { name: "Frontend Development", tag: "Medium", deadline: "Deadline 2025/12/30", img: "/images/avatar.png", names: "soundarya" },
+        { name: "Frontend Development", tag: "Medium", deadline: "Deadline 2025/12/30", img: "/images/avatar.png", names: "Soundarya" },
         { name: "User Testing", tag: "Low", deadline: "Deadline 2026/01/06", img: "/images/avatar.png", names: "Priya" },
         { name: "Backend Development", tag: "High", deadline: "Deadline 2026/12/30", img: "/images/avatar.png", names: "Divya" },
-        { name: "UI Design", tag: "Medium", deadline: "Deadline 2025/12/30", img: "/images/avatar.png", names: "soundarya" },
+        { name: "UI Design", tag: "Medium", deadline: "Deadline 2025/12/30", img: "/images/avatar.png", names: "Soundarya" },
       ],
     },
     {
@@ -26,9 +26,9 @@ export function OverviewBoard() {
       name: "COMPLETED",
       tasks: [
         { name: "Design Framework", tag: "High", deadline: "Deadline 2026/05/13", img: "/images/avatar.png", names: "Giftson" },
-        { name: "Backend API", tag: "High", deadline: "Deadline 2027/12/30", img: "/images/avatar.png", names: "soundarya" },
-        { name: "Frontend Medium", tag: "Medium", deadline: "Deadline 2028/01/09", img: "/images/avatar.png", names: "soundarya" },
-        { name: "Database", tag: "Low", deadline: "Deadline 2029/07/10", img: "/images/avatar.png", names: "soundarya" },
+        { name: "Backend API", tag: "High", deadline: "Deadline 2027/12/30", img: "/images/avatar.png", names: "Soundarya" },
+        { name: "Frontend Medium", tag: "Medium", deadline: "Deadline 2028/01/09", img: "/images/avatar.png", names: "Soundarya" },
+        { name: "Database", tag: "Low", deadline: "Deadline 2029/07/10", img: "/images/avatar.png", names: "Soundarya" },
       ],
     },
   ];
@@ -38,95 +38,75 @@ export function OverviewBoard() {
     if (tag === "Medium") return "w-1/2";
     if (tag === "High") return "w-full";
   }
-
   return (
-    <section className="mb-2 p-1">
-      <div className="flex items-center justify-between">
-        <h1 className="text-lg font-bold text-white">Overview</h1>
-
-        <div className="flex gap-2  p-6 ">
-          <Button className="hover:bg-purple-700 text-white px-2 py-1">
-            <PlusIcon className="text-gray-300" size={20} />
-            Export
+    <section className="mb-4">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
+        <h1 className="text-xl sm:text-2xl ml-2 font-semibold text-white">Overview</h1>
+        <div className="flex gap-2 p-6">
+          <Button className="flex items-center gap-1 px-3 py-1 text-white hover:bg-purple-700 border border-gray-600">
+            <PlusIcon size={16} /> Add Task
           </Button>
-
-          <Button className="hover:bg-purple-700  text-white ">
-            <PlusIcon className="text-gray-300" size={20} />
-            Add New
+          <Button className="flex items-center p-3  px-3 py-1 text-white hover:bg-purple-700 border border-gray-600">
+            <PlusIcon size={16} /> New Project
           </Button>
         </div>
       </div>
-
       {/* Columns */}
-      
-      <div className="grid grid-cols-2 p-4  sm:grid-cols-3 lg:grid-cols-3 gap-4 bg-black space-y-3 overflow-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4 ">
         {columns.map((col) => (
           <div key={col.name}>
-            <h2 className="font-semibold mb-3 text-white">{col.name}</h2>
-
-            <div className="space-y-6">
+            <h2 className="text-sm sm:text-base font-semibold text-white uppercase font-family: font/family/sans;font-weight: 700;font-style: Bold font-size: 13px;leading-trim: NONE;line-height: 100%;letter-spacing: 5% vertical-align: middle;text-transform: uppercase -mt-7">{col.name}</h2>
+            <div className="flex flex-col gap-4 mt-4">
               {col.tasks.map((task, index) => (
                 <Card key={index} className="bg-neutral-900 border border-neutral-800 relative">
-
-                  {/* TAG BADGE - TOP RIGHT */}
-                  <div className="absolute top-3 right-3">
+                  {/* Tag Badge */}
+                  <div className="absolute top-2 right-2">
                     <span
-                      className={`px-2 py-1 rounded text-xs font-semibold
+                      className={`
+                        text-[8px] sm:text-xs md:text-sm lg:text-base
+                        font-medium 
+                        rounded-full 
+                        px-2 sm:px-3 md:px-4 
+                        py-0.5 sm:py-1 md:py-1.5 
+                        transition 
                         ${
                           task.tag === "High"
-                            ? "bg-green-600 text-white"
+                            ? "bg-black text-green-600 hover:bg-gray-800"
                             : task.tag === "Medium"
-                            ? "bg-yellow-500 text-black"
-                            : "bg-red-600 text-white"
+                            ? "bg-black text-yellow-500 hover:bg-gray-800"
+                            : "bg-black text-red-500 hover:bg-gray-800"
                         }
                       `}
                     >
                       {task.tag}
                     </span>
                   </div>
-
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-sm text-white">{task.name}</CardTitle>
-
-                    {/* Deadline */}
-                    <p className="text-xs text-gray-500 tracking-tight [filter:blur(0.6px)] mt-1">
-                      {task.deadline}
-                    </p>
-
-                    {/* Avatar + Name */}
-                    <div className="flex items-center gap-3 mt-2">
-                      <img
-                        src={task.img}
-                        className="h-8 w-8 rounded-full object-cover opacity-80"
-                      />
-                      
-                      <p className="text-sm mr-1 text-gray-500 tracking-tight mb-2 [filter:blur(0.6px)] ">{task.names}</p>
+                  <CardHeader className="pb-0 pt-2 ">
+                    <CardTitle className="text-white text-sm sm:text-base font-semibold">{task.name}</CardTitle>
+                    <p className="text-gray-300 text-xs sm:text-sm mt-0.3">{task.deadline}</p>
+                    <div className="flex items-center gap-2 -ml-1 -mt-0.3">
+                      <img src={task.img} className="h-8 w-8 rounded-full object-cover opacity-80" />
+                      <p className="text-white text-xs sm:text-sm -ml-1 ">{task.names}</p>
                     </div>
                   </CardHeader>
-
                   <CardContent>
-                    {/* PROGRESS BAR */}
-                      
-                  <div className="  bg-neutral-700 h-1 pl-2 rounded-full overflow-hidden">
-  <div
-    className={`h-1 bg-purple-500 rounded-full pl-9 ${getWidth(task.tag)}`}
-  ></div>
-</div>
-                        
-
+                    {(col.name === "IN PROGRESS" || col.name === "COMPLETED") && (
+                      <div className="bg-black h-2 rounded-full overflow-hidden -mt-7 ml-6 mr-4">
+                        <div
+                          className={`h-2 rounded-full bg-purple-400 ${
+                            col.name === "COMPLETED" ? "w-full" : getWidth(task.tag)
+                          }`}
+                        />
+                      </div>
+                    )}
                   </CardContent>
-
                 </Card>
-                
               ))}
             </div>
           </div>
-          
         ))}
       </div>
-       
     </section>
-    
-    
-  );
+  )
 }

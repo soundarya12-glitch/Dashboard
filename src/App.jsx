@@ -4,9 +4,10 @@ import { DashboardCards } from "./components/ui/Dashboardcards.jsx"
 import { OverviewBoard } from "./components/ui/OverviewBoard.jsx"
 import Footer  from "./components/ui/Footer.jsx"
 
+
 function App() {
   return (
-    <div className="flex h-screen bg-black">
+    <div className="flex h-screen bg-black overflow-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200 ">
 
       {/* LEFT SIDEBAR */}
       <Sidebar />
@@ -26,6 +27,7 @@ function App() {
         <OverviewBoard />
 
         {/* FOOTER */}
+        
         <Footer />
       </div>
      
