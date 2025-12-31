@@ -42,9 +42,16 @@ export function OverviewBoard() {
     <section className="mb-4">
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
-        <h1 className="text-xl sm:text-2xl ml-2 font-semibold text-white">Overview</h1>
-        <div className="flex gap-2 p-6">
-          <Button className="flex items-center gap-1 px-3 py-1 text-white hover:bg-purple-700 border border-gray-600">
+        <h1 className="font-family: font/family/sans;
+font-weight: font/weight/semibold;
+font-size: spacing/5;
+leading-trim: NONE;
+line-height: 100%;
+letter-spacing: -2%;
+vertical-align: middle;
+-ml-2 font-semibold text-white">Overview</h1>
+        <div className="flex gap-2 p-8 pr-2">
+          <Button className="flex items-center gap-1 px-3 py-1 -ml-3 text-white hover:bg-purple-700 border border-gray-600">
             <PlusIcon size={16} /> Add Task
           </Button>
           <Button className="flex items-center p-3  px-3 py-1 text-white hover:bg-purple-700 border border-gray-600">
@@ -53,13 +60,13 @@ export function OverviewBoard() {
         </div>
       </div>
       {/* Columns */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4 ">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4  ">
         {columns.map((col) => (
           <div key={col.name}>
-            <h2 className="text-sm sm:text-base font-semibold text-white uppercase font-family: font/family/sans;font-weight: 700;font-style: Bold font-size: 13px;leading-trim: NONE;line-height: 100%;letter-spacing: 5% vertical-align: middle;text-transform: uppercase -mt-7">{col.name}</h2>
-            <div className="flex flex-col gap-4 mt-4">
+            <h2 className="text-sm sm:text-base font-semibold text-white uppercase font-family: font/family/sans;font-weight: 700;font-style: Bold font-size: 13px;leading-trim: NONE;line-height: 100%;letter-spacing: 5% vertical-align: middle;text-transform: uppercase -mt-6 -ml-1">{col.name}</h2>
+            <div className="flex flex-col gap-4 mt-4 ">
               {col.tasks.map((task, index) => (
-                <Card key={index} className="bg-neutral-900 border border-neutral-800 relative">
+                <Card key={index} className="bg-neutral-900 border border-neutral-800 relative ">
                   {/* Tag Badge */}
                   <div className="absolute top-2 right-2">
                     <span
@@ -83,11 +90,34 @@ export function OverviewBoard() {
                     </span>
                   </div>
                   <CardHeader className="pb-0 pt-2 ">
-                    <CardTitle className="text-white text-sm sm:text-base font-semibold">{task.name}</CardTitle>
-                    <p className="text-gray-300 text-xs sm:text-sm mt-0.3">{task.deadline}</p>
+                    <CardTitle className="text-white font-family: font/family/sans;
+font-weight: font/weight/semibold;
+font-style: Semi Bold;
+font-size: spacing/4;
+leading-trim: NONE;
+line-height: 100%;
+letter-spacing: 0%;
+vertical-align: middle;
+">{task.name}</CardTitle>
+                    <p className="text-gray-300 font-family: font/family/sans;
+font-weight: font/weight/normal;
+font-style: Regular;
+font-size: spacing/3-5;
+leading-trim: NONE;
+line-height: spacing/5;
+letter-spacing: 0%;
+ mt-0.3">{task.deadline}</p>
                     <div className="flex items-center gap-2 -ml-1 -mt-0.3">
                       <img src={task.img} className="h-8 w-8 rounded-full object-cover opacity-80" />
-                      <p className="text-white text-xs sm:text-sm -ml-1 ">{task.names}</p>
+                      <p className="text-white font-family: font/family/sans;
+font-weight: font/weight/normal;
+font-style: Regular;
+font-size: spacing/3-5;
+leading-trim: NONE;
+line-height: 100%;
+letter-spacing: 0%;
+vertical-align: middle;
+ -ml-1 ">{task.names}</p>
                     </div>
                   </CardHeader>
                   <CardContent>

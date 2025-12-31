@@ -129,11 +129,19 @@ body {
 }
 .scrollbar-thin::-webkit-scrollbar-track {
   background: #1f1f1f; /* track color */
+  overflow-y: hidden;
 }
 .scrollbar-thin::-webkit-scrollbar-thumb {
   background-color:white; /* thumb color */
+    overflow-y: hidden;
 
 /* optional border */
+}
+.scroll-container {
+  height: 300px; /* set a fixed height */
+ /* always show vertical scrollbar */
+   overflow-x: hidden;
+     display: none;
 }
 .footer {
   background:white;

@@ -10,14 +10,7 @@ export function Topbar() {
 
       {/* Left: Title + Search */}
       <div className="flex items-center gap-6 flex-1">
-        <h1 className="text-white font-family: font/family/sans;
-font-weight: font/weight/semibold;
-font-style: Semi Bold;
-font-size: spacing/5;
-leading-trim: NONE;
-line-height: 100%;
-letter-spacing: -2%;
-vertical-align: middle;
+        <h1 className="text-white font-family: font/family/sans;font-weight: font/weight/semibold;font-style: Semi Bold;font-size: spacing/5;leading-trim: NONE;line-height: 100%;letter-spacing: -2%;vertical-align: middle;
 ">All Projects</h1>
 
         {/* Search input with icon inside */}
@@ -33,7 +26,7 @@ vertical-align: middle;
   <Input
     type="text"
     placeholder="Search tasks, projects, or team members..."
-    className="bg-[#0e0e0e] text-white border border-black pl-12 w-full md:w-[400px] rounded-xl"
+    className="bg-[#0e0e0e] text-white border border-gray-500 pl-12 w-full md:w-[400px] rounded-xl"
   />
 </div>
 
@@ -41,13 +34,13 @@ vertical-align: middle;
 
   {/* Notification – tablet & desktop */}
   <Bell
-    className="hidden sm:block text-gray-300"
+    className="hidden sm:block text-gray-600"
     size={20}
   />
 <div className="flex items-center gap-3 sm:gap-4">
   {/* Help icon – desktop only */}
     <CircleQuestionMark
-    className="hidden lg:block text-gray-300"
+    className="hidden lg:block text-gray-600"
     size={20}
   />
   {/* Avatar – always visible */}

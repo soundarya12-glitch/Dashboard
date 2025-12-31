@@ -1,38 +1,95 @@
-import Sidebar from "./components/ui/sidebar.jsx"
-import { Topbar } from "./components/ui/Topbar.jsx"
-import { DashboardCards } from "./components/ui/Dashboardcards.jsx"
-import { OverviewBoard } from "./components/ui/OverviewBoard.jsx"
-import Footer  from "./components/ui/Footer.jsx"
-
-
+import Sidebar from "./components/ui/sidebar.jsx";
+import { Topbar } from "./components/ui/Topbar.jsx";
+import Footer from "./components/ui/Footer.jsx";
+import DashboardPage from "./components/ui/DashboardPage.jsx";
+import Calendar from "./components/ui/Calendar.jsx";
+import { Routes, Route } from "react-router-dom";
+import Project from "./components/ui/Project.jsx";
+import Users from "./components/ui/Users.jsx";
+import Editpage from "./components/ui/Editpage.jsx";
+import Addsection from "./components/ui/Addsection.jsx";
+import AddNewSectionPage from "./components/ui/AddNewSectionPage.jsx";
+import Addedit from "./components/ui/Addeditsectionpage.jsx";
+import Newcontact from "./components/ui/Newcontact.jsx";
+import Newblogger from "./components/ui/Newblogger.jsx";
+import Newcommunication from "./components/ui/Newcommunication.jsx";
+import NewTodoModal from "./components/ui/Newtodo.jsx";
+import Userpermission from "./components/ui/Userpermission.jsx";
+import UserContact from "./components/ui/Usercontact.jsx";
+import Blooger from "./components/ui/blogger.jsx";
+import Newuserpermission from "./components/Newuserpermission.jsx";
+import Communication from "./components/Communications.jsx";
+import Newscommunication from "./components/Newscommunication.jsx";
+import Todo from "./components/todo.jsx";
+import AccessContact from "./components/Accesslog.jsx";
+import Activitylog from "./components/Activitylog.jsx";
+import Energylog from "./components/Energylog.jsx";
+import Routehistory from "./components/Routehistory.jsx";
+import Tokencache from "./components/Tokencache.jsx";
+import Documentfollow from "./components/Documentfollow.jsx";
+import EditContact from "./components/Editcontact.jsx";
+import Editblogger from "./components/Editblogger.jsx";
+import Editcommunications from "./components/Editcommunications.jsx";
+import EditTodo from "./components/edittodo.jsx";
+import Editpermission from "./components/Editpermission.jsx";
 function App() {
   return (
-    <div className="flex h-screen bg-black overflow-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200 ">
-
-      {/* LEFT SIDEBAR */}
+    <div className="flex h-screen bg-black overflow-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200">
+      
+      {/* Sidebar */}
       <Sidebar />
 
-      {/* MAIN CONTENT */}
+      {/* Main content */}
       <div className="flex-1 flex flex-col">
-
-        {/* TOP NAVBAR */}
         <Topbar />
 
-        {/* DASHBOARD CARDS */}
-        <div className="p-6">
-          <DashboardCards />
+        {/* Page content */}
+        <div className="flex-1 p-6">
+          <Routes>
+            <Route path="/" element={<DashboardPage />} />
+            <Route path="/calendar" element={<Calendar />} />
+             <Route path="/project" element={<Project />} />
+              <Route path="/users" element={<Users />} />
+              <Route path="/editcontact/:id" element={<EditContact />} />
+ <Route path="/editblogger/:id" element={<Editblogger />} />
+               <Route path="/editcontact/:id" element={<EditContact />} />
+  <Route path="/Edittodo/:id" element={<EditTodo />} />
+  <Route path="/editcommunications/:id" element={<Editcommunications />} />
+    <Route path="/editpermission/:id" element={<Editpermission />} />
+                  <Route path="/editpage/:id" element={<Addedit />} />
+    <Route path="/addsection/:id" element={<AddNewSectionPage />} />
+            <Route path="/Newcontact" element={<Newcontact />} />
+              <Route path="/Newblogger" element={<Newblogger />} />
+                   <Route path="/Newcommunication" element={<Newcommunication />} />
+                       <Route path="/Newtodo" element={<NewTodoModal />} />
+                         <Route path="/Userpermission" element={<Userpermission />} />
+                           <Route path="/Usercontact" element={<UserContact />} />
+                            <Route path="/blogger" element={<Blooger />} />
+                            <Route path="/Newuserpermission" element={<Newuserpermission />} />
+                               <Route path="/Communications" element={<Communication />} />
+                                  <Route path="/Newscommunication" element={<Newscommunication />} />
+                                     <Route path="/todo" element={<Todo/>} />
+                                         <Route path="/Accesslog" element={<AccessContact/>} />
+                                          <Route path="/Activitylog" element={<Activitylog/>} />
+                                              <Route path="/Energylog" element={<Energylog/>} />
+                                                <Route path="/Routehistory" element={<Routehistory/>}/>
+                                                   <Route path="/Tokencache" element={<Tokencache/>}/>
+                                                   <Route path="/Documentfollow" element={<Documentfollow/>}/>
+                                    
+                                    
+
+
+
+                           
+                           
+          </Routes>
         </div>
 
-        {/* OVERVIEW BOARD */}
-        <OverviewBoard />
-
-        {/* FOOTER */}
-        
         <Footer />
       </div>
-     
+    
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
