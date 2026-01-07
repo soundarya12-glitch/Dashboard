@@ -23,7 +23,8 @@ import {
   GripVertical,
   Plus,
   ChevronDown,
-  Check,Columns2Icon,Star
+  Check,Columns2Icon,Star,MessageCircle,
+  Heart
 } from "lucide-react"
 
 import TablePagination from "./Pageniation"
@@ -38,23 +39,9 @@ import boxstyle from "./boxstyle"
 /* ---------------- DATA ---------------- */
 
 const sections = [
-  { id: 1, header: "Cover page", type: "Cover page", status: "In Process", target: "15", limit: "8", reviewer: "Eddie Lake",favourite:false },
-  { id: 2, header: "Table of contents", type: "Table of contents", status: "Done", target: "10", limit: "8", reviewer: "Eddie Lake" },
-  { id: 3, header: "Executive summary", type: "Narrative", status: "Done", target: "20", limit: "8", reviewer: "Eddie Lake" },
-  { id: 4, header: "Technical approach", type: "Narrative", status: "Done", target: "25", limit: "18", reviewer: "Jamik Tashpulatov" },
-  { id: 5, header: "Design", type: "Narrative", status: "In Process", target: "29", limit: "28", reviewer: "Jamik Tashpulatov" },
-  { id: 6, header: "Cover page", type: "Cover page", status: "In Process", target: "15", limit: "8", reviewer: "Eddie Lake",favourite:false },
-  { id: 7, header: "Table of contents", type: "Table of contents", status: "Done", target: "10", limit: "8", reviewer: "Eddie Lake" },
-  { id: 8, header: "Executive summary", type: "Narrative", status: "Done", target: "20", limit: "8", reviewer: "Eddie Lake" },
-  { id: 9, header: "Technical approach", type: "Narrative", status: "Done", target: "25", limit: "18", reviewer: "Jamik Tashpulatov" },
-  { id: 10, header: "Design", type: "Narrative", status: "In Process", target: "29", limit: "28", reviewer: "Jamik Tashpulatov" },
- 
-  
-  
-  
-  
-]
 
+  
+];
 const allColumns = [
   { key: "header", label: "Header" },
   { key: "type", label: "Section Type" },
@@ -73,6 +60,32 @@ export default function ProposalOutlineTable() {
     allColumns.map((c) => c.key)
     
   )
+ useEffect(() => {
+  const syncComments = () => {
+    setTableData(prev =>
+      prev.map(row => {
+        const key = `comments-user-${row.id}`;
+        const saved = JSON.parse(localStorage.getItem(key)) || [];
+        return {
+          ...row,
+          commentsByUser: saved,
+        };
+      })
+    );
+  };
+
+  syncComments();
+  window.addEventListener("storage", syncComments);
+
+  return () => {
+    window.removeEventListener("storage", syncComments);
+  };
+}, []);
+
+
+  const getLikesCount = (item) => {
+  return (item.commentsByUser || []).filter(c => c.liked).length;
+};
   const [isEditing, setIsEditing] = useState(false)
 const [editingRow, setEditingRow] = useState(null)
 
@@ -140,7 +153,7 @@ const [newSectionName, setNewSectionName] = useState(""); // store input value
 // Function to edit a row (here we just log, but you can show a modal/input)
 const openAddModal = () => {
   setEditingRow({
-    id: null,        // 👈 IMPORTANT (null illa)
+    id: null,        // ðŸ‘ˆ IMPORTANT (null illa)
     header : "",
     type: "",
     status: "In Process",
@@ -155,7 +168,30 @@ const openAddModal = () => {
 
   /* ---------- SAVE (ADD / EDIT) ---------- */
 const handleSave = () => {
-  if (!editingRow.header.trim()) return;
+  if (!editingRow.header) {
+    alert(" Name is required");
+    return;
+  }
+if (!editingRow.type) {
+  alert("Email is required");
+  return;
+}
+
+// Use the same value you checked above
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+if (!emailRegex.test(editingRow.type)) {
+  alert("Please enter a valid email contains @");
+  return;
+}
+
+   if (!editingRow.target) {
+    alert(" Target is required");
+    return;
+  }
+   if (!editingRow.limit) {
+    alert(" limit is required");
+    return;
+  }
 
   setTableData((prev) => {
     if (editingRow.id == null) {
@@ -169,7 +205,7 @@ const handleSave = () => {
     );
   });
 
-  // ✅ CLOSE MODAL after save
+  // âœ… CLOSE MODAL after save
   setIsEditing(false);
   setEditingRow(null);
 };
@@ -250,7 +286,8 @@ hover:bg-zinc-800">
               <TableHead className="w-80  " />
               <TableHead className="w-8 text-pink-70 ">
                 <Checkbox checked={allSelected} onCheckedChange={toggleSelectAll} />
-              
+             
+       
               </TableHead>
 
               {visibleColumns.includes("header") && <TableHead className="text-white font-family: font/family/sans;
@@ -298,6 +335,24 @@ line-height: 100%;
 pl-20
 letter-spacing: -0.35px;
 vertical-align: middle;">Limit</TableHead>}
+   {visibleColumns.includes("reviewer") && <TableHead className="text-white font-family: font/family/sans;
+font-weight: font/weight/medium;
+font-style: Medium;
+font-size: spacing/3-5;
+leading-trim: NONE;
+line-height: 100%;
+letter-spacing: -0.35px;
+pl-19
+vertical-align: middle;">Comments</TableHead>}
+ {visibleColumns.includes("reviewer") && <TableHead className="text-white font-family: font/family/sans;
+font-weight: font/weight/medium;
+font-style: Medium;
+font-size: spacing/3-5;
+leading-trim: NONE;
+line-height: 100%;
+letter-spacing: -0.35px;
+pl-19
+vertical-align: middle;">Likes</TableHead>}
               {visibleColumns.includes("reviewer") && <TableHead className="text-white font-family: font/family/sans;
 font-weight: font/weight/medium;
 font-style: Medium;
@@ -316,6 +371,7 @@ line-height: 100%;
 letter-spacing: -0.35px;
 pl-12
 vertical-align: middle;">Favourites</TableHead>}
+
      
               <TableHead className="w-8 text-pink-70  " />
             </TableRow>
@@ -337,10 +393,20 @@ vertical-align: middle;">Favourites</TableHead>}
                 </TableCell>
 
              {visibleColumns.includes("header") && (
-                  <TableCell className="text-zinc-200 font-semibold">
-                    {item.header}
-                  </TableCell>
-                )}
+                  <TableCell
+    className="text-zinc-200 font-semibold cursor-pointer hover:underline"
+    onClick={() =>
+      navigate(
+        `/editpage/${item.id}/profile/${item.id}`,
+        {
+          state: { header: item.header } // 🔥 THIS IS THE KEY
+        }
+      )
+    }
+  >
+    {item.header}
+  </TableCell>
+)}
 
                 {visibleColumns.includes("type") && (
                   <TableCell>
@@ -350,7 +416,7 @@ vertical-align: middle;">Favourites</TableHead>}
   >
     {item.type}
   </span>
- 
+    
 </TableCell>
                 )}
 
@@ -374,7 +440,20 @@ vertical-align: middle;">Favourites</TableHead>}
 
                 {visibleColumns.includes("target") && <TableCell className="text-sm font-semibold pl-20 text-zinc-200">{item.target}</TableCell>}
                 {visibleColumns.includes("limit") && <TableCell className="text-sm font-semibold pl-20 text-zinc-200 ">{item.limit}</TableCell>}
-                
+               {visibleColumns.includes("limit") && <TableCell className="text-sm font-semibold pl-20  text-zinc-200 ">
+              <span className="relative inline-flex items-center  text-white text-xs px-2 py-1 rounded-full">
+  <MessageCircle className="w-5 h-5  mr-5 text-stone-600  " />
+  {(item.commentsByUser || []).length}
+</span>
+</TableCell>}
+  <TableCell className="text-sm font-semibold ml-6 pl-20 text-zinc-200">
+ <span className="relative inline-flex items-center  text-white text-xs px-2 py-1 rounded-full">
+  <Heart className="w-5 h-5 mr-5 fill-red-600 text-black " />
+      {getLikesCount(item)}
+      </span>
+   
+  </TableCell>
+              
             {visibleColumns.includes("reviewer") &&
                  (
                   <TableCell className=" text-white font-family: font/family/sans;
@@ -441,6 +520,7 @@ vertical-align: middle ">
 
                   </TableCell>
                 )}
+                
    <button
     onClick={() => toggleFavourite(item.id)}
     className="p-1  ml-20 rounded hover:bg-stone-700"
@@ -453,7 +533,11 @@ vertical-align: middle ">
           : "text-gray-400 mt-5 "
       }
     />
+    
   </button>
+ 
+  
+  
                 <TableCell>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -471,7 +555,10 @@ vertical-align: middle ">
   hover:bg-stone-700
   focus:bg-stone-700
   data-[highlighted]:text-white"
-onClick={() => navigate(`/editpage/${item.id}`)}
+
+onClick={() =>
+  navigate(`/editpage/${item.id}/profile/${item.id}`)}
+
 
 >
   Edit
@@ -520,7 +607,7 @@ onClick={() => navigate(`/editpage/${item.id}`)}
                       >
                         Delete
                       </DropdownMenuItem>
-                    
+                  
 
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -550,7 +637,7 @@ onClick={() => navigate(`/editpage/${item.id}`)}
  {isEditing && editingRow && (
   <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
     
-    <div className="bg-black border border-gray-200 rounded-xl p-6 w-[520px] space-y-3">
+    <div className="bg-black border border-gray-200 rounded-xl p-6 w-[400px] space-y-3">
 
       <div className="relative">
   <h2 className="text-white font-semibold text-center text-xl">
@@ -563,16 +650,16 @@ onClick={() => navigate(`/editpage/${item.id}`)}
     }}
     className="absolute top-0 right-0 mt-2 mr-2 text-white font-bold text-xl "
   >
-    ✕
+    âœ•
   </button>
 </div>
 
       <h3 className="text-white  border-t pt-9  border-white ">Enter Your Name</h3>
-      <TextInput className="-mt-1 pl-2 pr-65  text-white
+      <TextInput className="-mt-1 pl-2 w-90 text-white
       hover:border-gray-900
     focus:border-pink-400
     focus:ring-0
-    focus:outline-none  bg-stone-600"
+    focus:outline-none   bg-stone-600"
         value={editingRow.header}
         onChange={(v) =>
           setEditingRow({ ...editingRow, header: v })
@@ -581,7 +668,7 @@ onClick={() => navigate(`/editpage/${item.id}`)}
       />
 
       <h3 className="text-white">Enter Your Email</h3>
-      <TextInput  className="-mt-1 pl-2 pr-65 text-white hover:border-gray-900
+      <TextInput type="email"  className="-mt-1 pl-2 w-90 text-white hover:border-gray-900
     focus:border-pink-400
     focus:ring-0
     focus:outline-none  bg-stone-600" 
@@ -592,7 +679,7 @@ onClick={() => navigate(`/editpage/${item.id}`)}
       />
 
       <h3 className="text-white">Enter your Target</h3>
-      <TextInput  type="number" className="-mt-1 pl-2 pr-65 text-white
+      <TextInput  type="number" className="-mt-1 pl-2 w-90 text-white
       hover:border-gray-900
     focus:border-pink-400
     focus:ring-0
@@ -603,7 +690,7 @@ onClick={() => navigate(`/editpage/${item.id}`)}
         }
       />
         <h3 className="text-white">Enter your Limit</h3>
-      <TextInput type="number"  className="-mt-1 pl-2 pr-65 text-white hover:border-gray-900
+      <TextInput type="number"  className="-mt-1 pl-2 w-90 text-white hover:border-gray-900
     focus:border-pink-400
     focus:ring-0
     focus:outline-none  text-left bg-stone-600" 

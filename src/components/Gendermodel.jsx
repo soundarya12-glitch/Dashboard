@@ -44,15 +44,7 @@ export default function GenderModal({ onSelect, onClose, onAdvanced }) {
           ))}
 
           {/* ADVANCED SEARCH Option */}
-          <div
-            className="p-2 cursor-pointer text-white  hover:bg-stone-500 font-semibold"
-            onClick={() => {
-              onAdvanced();  // Call parent to open advanced search modal
-              onClose();
-            }}
-          >
-            Advanced search
-          </div>
+       
         </div>
 
         <div className="text-right mt-3">

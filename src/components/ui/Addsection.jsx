@@ -1,8 +1,10 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import TextInput from "./Textinput";
+
 import { Button } from "@/components/ui/button";
 import Comments from "./Comments";
+import ProfilePanel from "../Profilepage";
 
 export default function Addsection() {
   const { id } = useParams();
@@ -33,6 +35,7 @@ export default function Addsection() {
   
    <div className="min-h-screen border border-stone-600 bg-black p-2 flex justify-center">
         {/* WHITE CARD */}
+        
         <div className=" w-full max-w-5xl rounded-xl p-2">
     
           {/* TITLE */}
@@ -41,7 +44,7 @@ export default function Addsection() {
           </h2>
   
           {/* FORM GRID */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 ">
   
             {/* Title */}
             <div>
@@ -150,6 +153,7 @@ export default function Addsection() {
 >
   Update
 </Button>
+
 
 
           </div>

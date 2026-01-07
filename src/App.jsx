@@ -3,7 +3,7 @@ import { Topbar } from "./components/ui/Topbar.jsx";
 import Footer from "./components/ui/Footer.jsx";
 import DashboardPage from "./components/ui/DashboardPage.jsx";
 import Calendar from "./components/ui/Calendar.jsx";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route,useLocation } from "react-router-dom";
 import Project from "./components/ui/Project.jsx";
 import Users from "./components/ui/Users.jsx";
 import Editpage from "./components/ui/Editpage.jsx";
@@ -32,16 +32,36 @@ import Editblogger from "./components/Editblogger.jsx";
 import Editcommunications from "./components/Editcommunications.jsx";
 import EditTodo from "./components/edittodo.jsx";
 import Editpermission from "./components/Editpermission.jsx";
+import ProfilePanel from "./components/Profilepage.jsx";
+import ProfileComments from "./components/ui/Comments.jsx";
+import Activitylogs from "./components/Activitylog.jsx";
+import EditWithProfile from "./components/EditWithProfiles.jsx";
+import ProfileAvatar from "./components/Avatar.jsx";
 function App() {
+  
+  const location = useLocation();
+  ;
+  const hideSidebar =
+    location.pathname.startsWith("/editpage") ||
+    location.pathname.startsWith("/addsection");
+
+// later test ku
+// localStorage.setItem("currentUser", "Sandra");
+
+  const showTopbar = location.pathname === "/";
+     
+
   return (
     <div className="flex h-screen bg-black overflow-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200">
       
       {/* Sidebar */}
-      <Sidebar />
+   {!hideSidebar && <Sidebar />}
+  
+   
 
       {/* Main content */}
       <div className="flex-1 flex flex-col">
-        <Topbar />
+              {showTopbar && <Topbar />}
 
         {/* Page content */}
         <div className="flex-1 p-6">
@@ -56,7 +76,7 @@ function App() {
   <Route path="/Edittodo/:id" element={<EditTodo />} />
   <Route path="/editcommunications/:id" element={<Editcommunications />} />
     <Route path="/editpermission/:id" element={<Editpermission />} />
-                  <Route path="/editpage/:id" element={<Addedit />} />
+                  <Route path="/editpage/:id/" element={<Addedit />} />
     <Route path="/addsection/:id" element={<AddNewSectionPage />} />
             <Route path="/Newcontact" element={<Newcontact />} />
               <Route path="/Newblogger" element={<Newblogger />} />
@@ -75,14 +95,20 @@ function App() {
                                                 <Route path="/Routehistory" element={<Routehistory/>}/>
                                                    <Route path="/Tokencache" element={<Tokencache/>}/>
                                                    <Route path="/Documentfollow" element={<Documentfollow/>}/>
-                                    
-                                    
-
+                                
+  <Route path="/activitylog" element={<Activitylogs />} />
+<Route path="/editpage/:id" element={<EditWithProfile />} />
+<Route path="/profile/:profileId" element={<ProfilePanel />} />
+<Route
+  path="/editpage/:id/profile/:profileId"
+  element={<EditWithProfile />}
+/>
 
 
                            
                            
           </Routes>
+    
         </div>
 
         <Footer />

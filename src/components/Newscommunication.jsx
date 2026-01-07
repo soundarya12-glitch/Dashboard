@@ -14,11 +14,24 @@ export default function Newcommunication() {
     designation: "",
   });
 
-  const handleSave = () => {
-    if (!contact.firstName || !contact.lastName) {
-      alert("First name & Last name required");
-      return;
-    }
+const handleSave = () => {
+  if (!contact.firstName) {
+    alert("First name is required");
+    return;
+  }
+  if (!contact.middleName) {
+    alert("Middle name is required");
+    return;
+  }
+  if (!contact.lastName) {
+    alert("Last name is required");
+    return;
+  }
+  if (!contact.designation) {
+    alert("Designation is required");
+    return;
+  }
+  
 
     const existing =
       JSON.parse(localStorage.getItem("Communications")) || [];

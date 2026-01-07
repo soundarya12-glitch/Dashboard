@@ -11,7 +11,10 @@ export default function NewTodo() {
   });
 
   const handleSave = () => {
-    if (!todo.description.trim()) return;
+     if (!todo.description) {
+    alert("Description is required");
+    return;
+  }
 
     const existing = JSON.parse(localStorage.getItem("todos")) || [];
     localStorage.setItem("todos", JSON.stringify([...existing, todo]));

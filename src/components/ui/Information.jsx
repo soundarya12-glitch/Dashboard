@@ -44,6 +44,8 @@ const LOCATIONS = ["Madurai", "Chennai", "Coimbatore"];
           <GenderModal
             onSelect={(value) => updateField("gender", value)}
             onClose={() => setOpenGender(false)}
+            className="hover:bg-stone-500"
+           
           />
         )}
 
@@ -67,9 +69,9 @@ const LOCATIONS = ["Madurai", "Chennai", "Coimbatore"];
         updateField("gender", value);
       }
     }}
-   className="mt-2 w-full h-10 rounded-2xl px-3 py-2
+   className="mt-2 w-full h-8 rounded-2xl px-3 py-1
   border border-gray-400 text-white bg-stone-600
-  focus:border-pink-400  focus:outline-none  hover:border-pink-400  "
+  focus:border-pink-400  focus:outline-none hover:bg-stone-500 hover:border-pink-400  "
   >
     <option  value="">Select Gender</option>
     <option value="Male">Male</option>
