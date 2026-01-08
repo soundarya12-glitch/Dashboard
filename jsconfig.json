@@ -1,12 +1,26 @@
 {
-  "files": [],
-  "references": [
-   
-  ],
   "compilerOptions": {
+    "target": "ES6",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+
+    "jsx": "react-jsx",
+
+    "strict": false,
+    "noImplicitAny": false,
+
+    "allowJs": true,
+    "skipLibCheck": true,
+
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    "module": "ESNext",
+    "moduleResolution": "Node",
+
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["src/*"]
     }
-  }
+  },
+  "include": ["src"]
 }
