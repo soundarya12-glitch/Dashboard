@@ -174,7 +174,7 @@ const handleSave = () => {
     return;
   }
 if (!editingRow.type) {
-  alert("Email is required");
+alert("Email is required");
   return;
 }
 

@@ -1,42 +1,44 @@
-import Sidebar from "./components/ui/sidebar.jsx";
-import { Topbar } from "./components/ui/Topbar.jsx";
-import Footer from "./components/ui/Footer.jsx";
-import DashboardPage from "./components/ui/DashboardPage.jsx";
-import Calendar from "./components/ui/Calendar.jsx";
+import Sidebar from "./components/ui/sidebar";
+import { Topbar } from "./components/ui/Topbar";
+import Footer from "./components/ui/Footer";
+import DashboardPage from "./components/ui/DashboardPage";
+import Calendar from "./components/ui/Calendar";
 import { Routes, Route,useLocation } from "react-router-dom";
-import Project from "./components/ui/Project.jsx";
-import Users from "./components/ui/Users.jsx";
-import Editpage from "./components/ui/Editpage.jsx";
-import Addsection from "./components/ui/Addsection.jsx";
-import AddNewSectionPage from "./components/ui/AddNewSectionPage.jsx";
-import Addedit from "./components/ui/Addeditsectionpage.jsx";
-import Newcontact from "./components/ui/Newcontact.jsx";
-import Newblogger from "./components/ui/Newblogger.jsx";
-import Newcommunication from "./components/ui/Newcommunication.jsx";
-import NewTodoModal from "./components/ui/Newtodo.jsx";
-import Userpermission from "./components/ui/Userpermission.jsx";
-import UserContact from "./components/ui/Usercontact.jsx";
-import Blooger from "./components/ui/blogger.jsx";
-import Newuserpermission from "./components/Newuserpermission.jsx";
-import Communication from "./components/Communications.jsx";
-import Newscommunication from "./components/Newscommunication.jsx";
-import Todo from "./components/todo.jsx";
-import AccessContact from "./components/Accesslog.jsx";
-import Activitylog from "./components/Activitylog.jsx";
-import Energylog from "./components/Energylog.jsx";
-import Routehistory from "./components/Routehistory.jsx";
-import Tokencache from "./components/Tokencache.jsx";
-import Documentfollow from "./components/Documentfollow.jsx";
-import EditContact from "./components/Editcontact.jsx";
-import Editblogger from "./components/Editblogger.jsx";
-import Editcommunications from "./components/Editcommunications.jsx";
-import EditTodo from "./components/Edittodo.js";
-import Editpermission from "./components/Editpermission.jsx";
-import ProfilePanel from "./components/Profilepage.jsx";
-import ProfileComments from "./components/ui/Comments.jsx";
-import Activitylogs from "./components/Activitylog.jsx";
-import EditWithProfile from "./components/EditWithProfiles.jsx";
-import ProfileAvatar from "./components/Avatar.jsx";
+import Project from "./components/ui/Project";
+import ProposalOutlineTable from "./components/ui/Users";
+import Editpage from "./components/ui/Editpage";
+import Addsection from "./components/ui/Addsection";
+import AddNewSectionPage from "./components/ui/AddNewSectionPage";
+import Addedit from "./components/ui/Addeditsectionpage";
+import Newcontact from "./components/ui/Newcontact";
+import Newblogger from "./components/ui/Newblogger";
+import Newcommunication from "./components/ui/Newcommunication";
+import NewTodoModal from "./components/ui/Newtodo";
+import Userpermission from "./components/ui/Userpermission";
+import UserContact from "./components/ui/Usercontact";
+import Blooger from "./components/ui/blogger";
+import Newuserpermission from "./components/Newuserpermission";
+import Communication from "./components/Communications";
+import Newscommunication from "./components/Newscommunication";
+import Todo from "./components/todo";
+import AccessContact from "./components/Accesslog";
+import Activitylog from "./components/Activitylog";
+import Energylog from "./components/Energylog";
+import Routehistory from "./components/Routehistory";
+import Tokencache from "./components/Tokencache";
+import Documentfollow from "./components/Documentfollow";
+import EditContact from "./components/Editcontact";
+import Editblogger from "./components/Editblogger";
+import Editcommunications from "./components/Editcommunications";
+import EditTodo from "./components/Edittodo";
+import Editpermission from "./components/Editpermission";
+import ProfilePanel from "./components/Profilepage";
+import ProfileComments from "./components/ui/Comments";
+import Activitylogs from "./components/Activitylog";
+import EditWithProfile from "./components/EditWithProfiles";
+import ProfileAvatar from "./components/Avatar";
+import { Import } from "lucide-react";
+import Users from "./components/ui/Users";
 function App() {
   
   const location = useLocation();
@@ -69,7 +71,7 @@ function App() {
             <Route path="/" element={<DashboardPage />} />
             <Route path="/calendar" element={<Calendar />} />
              <Route path="/project" element={<Project />} />
-              <Route path="/users" element={<Users />} />
+              <Route path="/users" element={<ProposalOutlineTable />} />
               <Route path="/editcontact/:id" element={<EditContact />} />
  <Route path="/editblogger/:id" element={<Editblogger />} />
                <Route path="/editcontact/:id" element={<EditContact />} />
